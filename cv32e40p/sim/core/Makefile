@@ -62,7 +62,7 @@ TEST_PROGRAM_RELPATH = ../../tests/programs/custom
 
 # Common output directories
 RUN_INDEX               ?= 0
-SIM_RESULTS              = simulation_results
+SIM_RESULTS              ?= simulation_results
 SIM_TEST_RESULTS         = $(SIM_RESULTS)/$(TEST)
 SIM_RUN_RESULTS          = $(SIM_TEST_RESULTS)/$(RUN_INDEX)
 SIM_TEST_PROGRAM_RESULTS = $(SIM_RUN_RESULTS)/test_program
