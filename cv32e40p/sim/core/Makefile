@@ -479,6 +479,10 @@ VERI_TRACE="--trace"
 VERI_CFLAGS+="-DVCD_TRACE"
 endif
 
+ifneq (${LOG_INSNS}, 0)
+VERI_CFLAGS+="-DINSN_TRACE"
+endif
+
 verilate: testbench_verilator
 
 sanity-veri-run:

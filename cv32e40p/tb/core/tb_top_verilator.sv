@@ -19,7 +19,8 @@ module tb_top_verilator
      input logic  rst_ni,
      input logic  fetch_enable_i,
      output logic tests_passed_o,
-     output logic tests_failed_o);
+     output logic tests_failed_o,
+     output logic [31:0] instr_addr);
 
     // cycle counter
     int unsigned            cycle_cnt_q;
@@ -101,6 +102,7 @@ module tb_top_verilator
          .tests_passed_o ( tests_passed_o ),
          .tests_failed_o ( tests_failed_o ),
          .exit_valid_o   ( exit_valid     ),
-         .exit_value_o   ( exit_value     ));
+         .exit_value_o   ( exit_value     ),
+         .instr_addr     ( instr_addr     ));
 
 endmodule // tb_top_verilator

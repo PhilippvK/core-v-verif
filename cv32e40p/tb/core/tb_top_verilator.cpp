@@ -18,6 +18,14 @@ double sc_time_stamp();
 static vluint64_t t = 0;
 Vtb_top_verilator *top;
 
+#define INSN_TRACE
+
+#ifdef INSN_TRACE
+static void log_cycle(FILE *fcsv) {
+    fprintf(fcsv, "%lu,%08x;\n", t / 10, top->instr_addr);
+}
+#endif
+
 int main(int argc, char **argv, char **env)
 {
 
@@ -47,6 +55,15 @@ int main(int argc, char **argv, char **env)
     top->trace(tfp, 99);
     tfp->open("verilator_tb.vcd");
 #endif
+#ifdef INSN_TRACE
+    FILE *fcsv = fopen("log_insn.csv", "w");
+    if (fcsv == NULL) {
+        fprintf(stderr, "ERROR: opening INSN_TRACE: %s\n", strerror(errno));
+        return 2;
+    }
+    fprintf(fcsv, "cycle,addr;\n");
+
+#endif
     top->fetch_enable_i = 1;
     top->clk_i          = 0;
     top->rst_ni         = 0;
@@ -68,11 +85,17 @@ int main(int argc, char **argv, char **env)
             top->rst_ni = 1;
         top->clk_i = !top->clk_i;
         top->eval();
+#ifdef INSN_TRACE
+        log_cycle(fcsv);
+#endif
 #ifdef VCD_TRACE
         tfp->dump(t);
 #endif
         t += 5;
     }
+#ifdef INSN_TRACE
+    fclose(fcsv);
+#endif
 #ifdef VCD_TRACE
     tfp->close();
 #endif

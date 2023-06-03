@@ -36,13 +36,14 @@ module cv32e40p_tb_wrapper
      output logic        tests_passed_o,
      output logic        tests_failed_o,
      output logic [31:0] exit_value_o,
-     output logic        exit_valid_o);
+     output logic        exit_valid_o,
+     output logic [31:0] instr_addr);
 
     // signals connecting core to memory
     logic                         instr_req;
     logic                         instr_gnt;
     logic                         instr_rvalid;
-    logic [31:0]                  instr_addr;
+    // logic [31:0]                  instr_addr;
     logic [INSTR_RDATA_WIDTH-1:0] instr_rdata;
 
     logic                         data_req;
