@@ -103,7 +103,7 @@ ifeq ($(CV_CORE_PATH),)
     CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout tags/$(CV_CORE_TAG)
   endif
 else
-  CLONE_CV_CORE_CMD = ln -s $(CV_CORE_PATH) $(CV_CORE_PKG)
+  CLONE_CV_CORE_CMD = test -L $(CV_CORE_PACKAGE) || ln -s $(CV_CORE_PATH) $(CV_CORE_PKG)
 endif
 
 ###############################################################################
