@@ -22,7 +22,7 @@ Vtb_top_verilator *top;
 
 #ifdef INSN_TRACE
 static void log_cycle(FILE *fcsv) {
-    fprintf(fcsv, "%lu,%08x;\n", t / 10, top->instr_addr);
+    fprintf(fcsv, "%lu,%08x,%x;\n", t / 10, top->instr_addr, top->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret);
 }
 #endif
 
@@ -79,6 +79,8 @@ int main(int argc, char **argv, char **env)
     set_mutidx(&idx);
     std::cout << "[tb_top_verilator] mutsel = " << idx.aval << "\n";
 #endif
+    size_t insn_count = 0;
+    size_t cyc_count = 0;
 
     while (!Verilated::gotFinish()) {
         if (t > 40)
@@ -86,6 +88,10 @@ int main(int argc, char **argv, char **env)
         top->clk_i = !top->clk_i;
         top->eval();
         if (t % 10 == 0) {
+            cyc_count++;
+            if(top->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret) {
+                insn_count++;
+            }
 #ifdef INSN_TRACE
             log_cycle(fcsv);
 #endif
@@ -101,6 +107,7 @@ int main(int argc, char **argv, char **env)
 #ifdef VCD_TRACE
     tfp->close();
 #endif
+    std::cout << "[tb_top_verilator] Finished: #cycles=" << cyc_count << " #insns=" << insn_count << "\n";
     delete top;
     exit(0);
 }
