@@ -18,7 +18,7 @@ double sc_time_stamp();
 static vluint64_t t = 0;
 Vtb_top_verilator *top;
 
-// #define INSN_TRACE
+// #define VCD_TRACE
 
 #ifdef INSN_TRACE
 static void log_cycle(FILE *fcsv) {
