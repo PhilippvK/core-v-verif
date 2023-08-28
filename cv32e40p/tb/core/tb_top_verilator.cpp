@@ -85,9 +85,11 @@ int main(int argc, char **argv, char **env)
             top->rst_ni = 1;
         top->clk_i = !top->clk_i;
         top->eval();
+        if (t % 10 == 0) {
 #ifdef INSN_TRACE
-        log_cycle(fcsv);
+            log_cycle(fcsv);
 #endif
+        }
 #ifdef VCD_TRACE
         tfp->dump(t);
 #endif
