@@ -1,6 +1,7 @@
 #include "svdpi.h"
 #include "Vtb_top_verilator__Dpi.h"
 #include "Vtb_top_verilator.h"
+#include "Vtb_top_verilator___024root.h"
 #include "verilated_vcd_c.h"
 #include "verilated.h"
 
@@ -90,7 +91,7 @@ int main(int argc, char **argv, char **env)
         top->eval();
         if (t % 10 == 0) {
             cyc_count++;
-            if(top->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret) {
+            if(top->rootp->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret) {
                 insn_count++;
             }
 #ifdef INSN_TRACE
