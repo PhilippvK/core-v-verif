@@ -24,7 +24,7 @@ Vtb_top_verilator *top;
 
 #ifdef INSN_TRACE
 static void log_cycle(FILE *fcsv) {
-    fprintf(fcsv, "%lu,%08x,%x;\n", t / 10, top->instr_addr, top->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret);
+    fprintf(fcsv, "%lu,%08x,%x;\n", t / 10, top->instr_addr, top->rootp->tb_top_verilator__DOT__cv32e40p_tb_wrapper_i__DOT__cv32e40p_core_i__DOT__id_stage_i__DOT__minstret);
 }
 #endif
 
